@@ -19,13 +19,13 @@ Source_dict = joblib.load("Source_dest.pkl")
 hours_mins_in_day = pd.date_range("00:00", "23:59", freq="1min").strftime('%H:%M').to_list()
 routes = joblib.load("route.pkl")
 stops_columns = joblib.load("stops_columns.pkl")
-
+shorts_cities = joblib.load("dict_cities.pkl")
 
 #function to determine available_routes according to source,Destination have been selected
-def routes_selection(source,Destination):
+def routes_selection(source,destination):
     available_routes=[]
     for route in routes:
-        if (route.split('→')[0].strip()==source) and (route.split('→')[-1].strip()==Destination):
+        if (route.split('→')[0].strip()==shorts_cities[source]) and (route.split('→')[-1].strip()==shorts_cities[destination]):
             available_routes.append(route)
     return available_routes
 
